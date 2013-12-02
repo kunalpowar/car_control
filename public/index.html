@@ -109,6 +109,7 @@
       control_area.on('touchend', function(event) {
         reset_control_ball();
         update_dash_info(0,0);
+        hide_warning_info();
         stage.draw();
       });
 
@@ -158,6 +159,11 @@
           ]
         });
 
+        warning_text.setAttrs({
+          y: warning_text_y_pos(),
+          fontSize: warning_text_font_size()
+        });
+
         stage.draw(); 
       };
 
@@ -183,18 +189,24 @@
       }
 
       function handle_warning_message(speed) {
-        if(speed > 120) {
-          warning_text.setAttrs({
-            visible: true
-          });
-        }
-        else{
-         warning_text.setAttrs({
-            visible: false
-          }); 
-        }
+        if(speed > 120)
+          show_warning_info();
+        else
+          hide_warning_info();
       }
 
+      function show_warning_info() {
+        warning_text.setAttrs({
+          visible: true
+        });
+      }
+
+      function hide_warning_info() {
+        warning_text.setAttrs({
+          visible: false
+        }); 
+      }
+      
       function control_ball_y() {
         return Math.floor(window.innerHeight - ball_radius());
       }
