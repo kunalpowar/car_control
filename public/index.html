@@ -72,6 +72,17 @@
         opacity: 0.5
       });
 
+      var warning_text = new Kinetic.Text({
+        y: warning_text_y_pos(),
+        fontFamily: 'digital',
+        align: 'right',
+        fontSize: warning_text_font_size(),
+        fontStyle: 'bold',
+        text: '',
+        fill: 'red',
+        visible: false
+      });
+
       var control_ball = new Kinetic.Circle({
         x: control_ball_x(),
         y: control_ball_y(),
@@ -91,6 +102,7 @@
         move_control_ball(touchPos);
         dash_info = calculate_speed_and_angle(touchPos);
         update_dash_info(dash_info.angle, dash_info.speed);
+        handle_warning_message(dash_info.speed);
         stage.draw();
       });
 
@@ -170,6 +182,15 @@
         };
       }
 
+      function handle_warning_message(speed) {
+        if(speed > 120) {
+          warning_text.setAttrs({
+            text: '!!! Engine Overload !!!',
+            visible: true
+          });
+        }
+      }
+
       function control_ball_y() {
         return Math.floor(window.innerHeight - ball_radius());
       }
@@ -200,6 +221,14 @@
         return Math.floor((dashboard_height() * 60)/100);  
       }
 
+      function warning_text_y_pos(){
+        return Math.floor(dashboard_height() + info_text_y_pos());
+      }
+
+      function warning_text_font_size() {
+        return Math.floor(info_text_font_size());  
+      }
+
       function dashboard_height() {
         return Math.floor((window.innerHeight * 10)/100);  
       }
@@ -221,6 +250,7 @@
         layer.draw();
       }
 
+      layer.add(warning_text);
       layer.add(left_dir_line);
       layer.add(right_dir_line);
       layer.add(speed_line);
