@@ -15,7 +15,8 @@
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.7.4.min.js"></script>
     <script defer="defer">
-      
+      var ws = new WebSocket('ws://thebot.kidoman.com:3000/ws')
+
       var max_turn_angle = 45;
       var max_forward_speed = 150;
 
@@ -254,6 +255,7 @@
       }
 
       function update_dash_info(angle, speed) {
+        ws.send(speed+ ","+ angle);
         writeMessage('Speed: '  + speed + ' Angle: ' + angle);
       }
 
