@@ -78,7 +78,7 @@
         align: 'right',
         fontSize: warning_text_font_size(),
         fontStyle: 'bold',
-        text: '',
+        text: '!!! Engine Overload !!!',
         fill: 'red',
         visible: false
       });
@@ -185,9 +185,13 @@
       function handle_warning_message(speed) {
         if(speed > 120) {
           warning_text.setAttrs({
-            text: '!!! Engine Overload !!!',
             visible: true
           });
+        }
+        else{
+         warning_text.setAttrs({
+            visible: false
+          }); 
         }
       }
 
