@@ -64,15 +64,6 @@
         ]
       });
 
-      var triangle = new Kinetic.RegularPolygon({
-        x: 100,
-        y: 200,
-        sides: 3,
-        radius: dir_pointer_radius(),
-        fill: 'red'
-      });
-
-
       var control_area = new Kinetic.Rect({
         width: window.innerWidth,
         height: window.innerHeight - dashboard_height(),
@@ -230,7 +221,6 @@
         layer.draw();
       }
 
-      layer.add(triangle);
       layer.add(left_dir_line);
       layer.add(right_dir_line);
       layer.add(speed_line);
